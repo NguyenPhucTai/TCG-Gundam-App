@@ -1,1 +1,5 @@
 node_modules
+# Expo cache and build files
+.expo/
+# iOS native build folder
+ios/

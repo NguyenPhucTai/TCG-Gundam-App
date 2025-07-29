@@ -1,38 +1,51 @@
-# DailyHabit
+# TCG Gundam App
 
-Ứng dụng quản lý thói quen hàng ngày được xây dựng bằng React Native, Expo và TypeScript.
+Landscape-oriented board game tracker app built with React Native, Expo, and TypeScript.
 
-## 🚀 Tính năng
+## 🚀 Features
 
-- ✅ Tạo và quản lý các thói quen hàng ngày
-- 🔥 Theo dõi streak (chuỗi ngày liên tiếp)
-- 🎨 Giao diện thân thiện và dễ sử dụng
-- 📱 Hỗ trợ cả iOS và Android
-- 💯 Unit tests coverage cao
-- 🌐 TypeScript support đầy đủ
+- Turn counter with increment/decrement controls
+- Per-player Resource and Ex Resource counters
+- Level display component
+- Reset, Revert, and Show Log buttons (UI only)
+- Pastel, modern UI with full-area press ripple effects
+  
+## � Theme
 
-## 🛠️ Công nghệ sử dụng
+- Soft pastel palette
+- Clear typography and spacing
 
-- **React Native** - Cross-platform mobile development
-- **Expo** - Development platform
-- **TypeScript** - Type safety
-- **Jest** - Unit testing framework
-- **React Testing Library** - Component testing
-- **ESLint** - Code linting
+## 🛠️ Tech Stack
 
-## 📋 Yêu cầu hệ thống
+- React Native 0.79.5
+- Expo Router 5.1.4
+- TypeScript (strict mode)
+- Jest (planned)
+- ESLint and Prettier
 
-- Node.js 20.x
-- npm hoặc yarn
+## 📋 Requirements
+
+- Node.js 14+ or 16+ LTS
+- npm or yarn
 - Expo CLI
-- iOS Simulator (cho Mac) hoặc Android Emulator
+- iOS Simulator or Android Emulator
 
-## 🔧 Cài đặt
+## 🔧 Installation
 
-1. Clone repository:
+1. Clone the repository:
 ```bash
-git clone https://github.com/NguyenPhucTai/DailyHabit.git
-cd DailyHabit
+git clone https://github.com/NguyenPhucTai/TCG-Gundam-App.git
+cd TCG-Gundam-App
+```
+2. Install dependencies:
+```bash
+npm install
+# or yarn
+```
+3. Run the app:
+```bash
+npm start
+# or yarn start
 ```
 
 2. Cài đặt dependencies:
@@ -45,12 +58,11 @@ npm install
 npm start
 ```
 
-## 🧪 Testing
+## 📱 Usage
 
-Chạy tất cả tests:
-```bash
-npm test
-```
+- Tap “+” / “-” on counters to adjust Resource and Ex Resource
+- Use the Turn counter on the left to track game turns
+- Press Reset to clear values; Revert and Show Log are UI placeholders
 
 Chạy tests với coverage:
 ```bash
@@ -62,23 +74,16 @@ Chạy tests trong watch mode:
 npm run test:watch
 ```
 
-## 📁 Cấu trúc dự án
+## 📁 Project Structure
 
 ```
-DailyHabit/
-├── __tests__/              # Main app tests
-├── components/             # Reusable components
-│   ├── __tests__/         # Component tests
-│   ├── Button.tsx
-│   ├── HabitCard.tsx
-│   └── index.ts
-├── utils/                  # Utility functions
-│   ├── __tests__/         # Utility tests
-│   ├── dateUtils.ts
-│   ├── habitUtils.ts
-│   └── index.ts
-├── App.tsx                # Main app component
-└── package.json
+TCG-Gundam-App/
+├── app/                  # Root layout and entry point
+├── components/           # Reusable UI components
+├── models/               # TypeScript interfaces
+├── assets/               # Static assets (icons, images)
+├── README.md             # Project documentation
+└── package.json          # Dependencies and scripts
 ```
 
 ## 🧪 Test Coverage
@@ -107,27 +112,25 @@ DailyHabit/
 - `npm run test:coverage` - Chạy tests với coverage report
 - `npm run test:ci` - Chạy tests cho CI environment
 
-## 🎯 Roadmap
+## 🛣️ Roadmap
 
-- [ ] Thêm push notifications
-- [ ] Dark mode support
-- [ ] Habit categories
-- [ ] Statistics và charts
-- [ ] Data persistence với AsyncStorage
-- [ ] Habit sharing
-- [ ] Achievement system
+- [ ] History log functionality
+- [ ] Revert action support
+- [ ] Data persistence (AsyncStorage)
+- [ ] Dark mode
+- [ ] Additional game stats and charts
 
 ## 🤝 Contributing
 
-1. Fork repository
-2. Tạo feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Tạo Pull Request
+1. Fork this repository
+2. Create a feature branch `git checkout -b feature/your-feature`
+3. Commit your changes `git commit -m "Add your feature"`
+4. Push to your branch `git push origin feature/your-feature`
+5. Open a Pull Request
 
 ## 📝 License
 
-Dự án này được phân phối dưới MIT License. Xem file `LICENSE` để biết thêm chi tiết.
+This project is licensed under the MIT License. See `LICENSE` for details.
 
 ## 👨‍💻 Tác giả
 
