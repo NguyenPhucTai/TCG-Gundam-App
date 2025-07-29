@@ -1,34 +1,32 @@
 import { Tabs } from 'expo-router';
+import { Text } from 'react-native';
 
 export default function TabLayout() {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: '#007AFF',
+        headerShown: false,
+      }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Trang chủ',
-          tabBarIcon: () => '🏠',
+          title: 'Games',
+          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>🎮</Text>,
         }}
       />
       <Tabs.Screen
-        name="habits"
+        name="new-game"
         options={{
-          title: 'Thói quen',
-          tabBarIcon: () => '✅',
+          title: 'New Game',
+          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>➕</Text>,
         }}
       />
       <Tabs.Screen
         name="stats"
         options={{
-          title: 'Thống kê',
-          tabBarIcon: () => '📊',
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Cá nhân',
-          tabBarIcon: () => '👤',
+          title: 'Stats',
+          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>📊</Text>,
         }}
       />
     </Tabs>
