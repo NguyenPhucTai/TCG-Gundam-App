@@ -1,36 +1,23 @@
-import React, { useState, useEffect, FC } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { turnControlStyles } from './TurnControl.styles';
-import Button from './Button';
+import TurnButton from './TurnButton';
 
-interface TurnControlProps {
-  resetKey: number;
+// Props for TurnControl: callback when player triggers next turn
+export interface TurnControlProps {
+  onNextTurn: (playerKey: 'firstPlayer' | 'secondPlayer') => void;
 }
-const TurnControl: FC<TurnControlProps> = ({ resetKey }) => {
-  const [turn, setTurn] = useState(0);
-  // Reset turn when resetKey changes
-  useEffect(() => {
-    setTurn(0);
-  }, [resetKey]);
 
-  const handleIncrement = () => {
-    setTurn(prev => prev + 1);
-  };
-  const handleDecrement = () => {
-    setTurn(prev => Math.max(0, prev - 1));
-  };
-
-  return (
-    <View style={turnControlStyles.container}>
-      <Text style={turnControlStyles.label}>Turn</Text>
-      <Text style={turnControlStyles.turnValue}>{turn.toString()}</Text>
-      <Button variant="secondary" onPress={handleIncrement}>
-        +
-      </Button>
-      <Button variant="secondary" onPress={handleDecrement}>
-        -
-      </Button>
-    </View>
-  );
-};
+const TurnControl: React.FC<TurnControlProps> = ({ onNextTurn }) => (
+  <View style={turnControlStyles.container}>
+    <TurnButton
+      label="Player 1 Next Turn"
+      onPress={() => onNextTurn('firstPlayer')}
+    />
+    <TurnButton
+      label="Player 2 Next Turn"
+      onPress={() => onNextTurn('secondPlayer')}
+    />
+  </View>
+);
 export default TurnControl;

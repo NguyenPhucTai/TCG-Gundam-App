@@ -1,8 +1,11 @@
-import { Player } from './Player';
-import { GameAction } from './GameAction';
+import { PlayerState } from './PlayerState';
+import { HistoryEntry } from './HistoryEntry';
 
-// Interface for Game state
+// Interface for overall game state including history
 export interface GameState {
-  players: Player[];
-  history: GameAction[];
+  firstPlayer: PlayerState;
+  secondPlayer: PlayerState;
+  history: HistoryEntry[];
+  // last player who took a turn; used to enforce alternation
+  lastTurn: 'firstPlayer' | 'secondPlayer' | null;
 }

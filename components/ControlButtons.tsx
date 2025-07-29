@@ -7,10 +7,10 @@ import { controlButtonsStyles } from './ControlButtons.styles';
 interface ControlButtonsProps {
   onReset: () => void;
   onRevert: () => void;
-  onShowLog: () => void;
+  onDice: () => void;
 }
 
-export default function ControlButtons({ onReset, onRevert, onShowLog }: ControlButtonsProps) {
+export default function ControlButtons({ onReset, onRevert, onDice }: ControlButtonsProps) {
   return (
     <View style={controlButtonsStyles.container}>
       <PressableAny
@@ -31,10 +31,10 @@ export default function ControlButtons({ onReset, onRevert, onShowLog }: Control
       
       <PressableAny
         style={controlButtonsStyles.controlButton}
-        onPress={onShowLog}
+        onPress={onDice}
         android_ripple={{ color: '#ccc' }}
       >
-        <Text style={controlButtonsStyles.buttonText}>Show Log</Text>
+        <Text style={controlButtonsStyles.buttonText}>Dice</Text>
       </PressableAny>
     </View>
   );

@@ -17,4 +17,7 @@ export const levelDisplayStyles = StyleSheet.create({
     fontSize: 80,
     fontWeight: 'bold',
   },
+  highlightValue: {
+    color: 'red',
+  },
 });

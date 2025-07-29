@@ -4,11 +4,11 @@ Landscape-oriented board game tracker app built with React Native, Expo, and Typ
 
 ## 🚀 Features
 
-- Turn counter with increment/decrement controls
-- Per-player Resource and Ex Resource counters
-- Level display component
-- Reset, Revert, and Show Log buttons (UI only)
-- Pastel, modern UI with full-area press ripple effects
+- Next Turn logic: alternating turns, maxResource increment, exResource boost on first turn, maxResource cap at 10
+- Resource and Ex Resource counters: resource range 0–10, exResource range 0–5, dynamic clamping
+- Level display: computed = maxResource + exResource, highlights active player
+- Control buttons: Reset (full reset), Revert (undo full game turn), Dice (roll random 1–6)
+- Pastel, modern UI with press ripple effects
   
 ## � Theme
 
@@ -60,9 +60,11 @@ npm start
 
 ## 📱 Usage
 
-- Tap “+” / “-” on counters to adjust Resource and Ex Resource
-- Use the Turn counter on the left to track game turns
-- Press Reset to clear values; Revert and Show Log are UI placeholders
+- Tap “+” / “-” on the counters to adjust values within set ranges
+- Press Next Turn for each player in alternation to advance turns and update resources
+- Press Reset to clear the game to initial state
+- Press Revert to undo the last full turn (restores both players)
+- Press Dice to roll a random number (1–6)
 
 Chạy tests với coverage:
 ```bash

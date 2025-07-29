@@ -5,7 +5,7 @@ import Counter from './Counter';
 import LevelDisplay from './LevelDisplay';
 import { playerSectionStyles } from './PlayerSection.styles';
 
-export default function PlayerSection({ player, onResourceChange, style }: PlayerSectionProps) {
+export default function PlayerSection({ player, onResourceChange, style, isActive }: PlayerSectionProps) {
   // Format Ex Resource (display single digit for zero)
   const formatExResource = (value: number) => value.toString();
 
@@ -45,7 +45,7 @@ export default function PlayerSection({ player, onResourceChange, style }: Playe
           onIncrement={handleExResourceIncrement}
           onDecrement={handleExResourceDecrement}
         />
-        <LevelDisplay value={player.level} />
+        <LevelDisplay value={player.level} highlight={isActive} />
       </View>
     </View>
   );

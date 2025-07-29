@@ -6,4 +6,6 @@ export interface PlayerSectionProps {
   player: Player;
   onResourceChange: (playerId: string, type: 'resource' | 'exResource', newValue: number) => void;
   style?: ViewStyle;
+  // Highlight level when active turn
+  isActive?: boolean;
 }

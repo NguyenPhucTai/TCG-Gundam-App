@@ -7,15 +7,15 @@ export const appStyles = StyleSheet.create({
         flexDirection: 'row',
         paddingTop: 30,
         paddingBottom: 30,
-        paddingLeft: 60,
-        paddingRight: 60,
+        paddingLeft: 80,
+        paddingRight: 80,
     },
     turnArea: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         paddingLeft: 30,
-        paddingRight: 35,
+        paddingRight: 50,
     },
     gameArea: {
         flex: 10,
