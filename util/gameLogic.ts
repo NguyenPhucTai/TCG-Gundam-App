@@ -98,16 +98,13 @@ export function updateStat(
     // Recalculate level: maxResource + exResource
     target.level = target.maxResource + target.exResource;
   }
-  // Build new state and append history
-  const newState: GameState = {
+  // Only update stats without affecting history (only nextTurn records history)
+  return {
     firstPlayer: newFirst,
     secondPlayer: newSecond,
-    history: [...state.history],
+    history: state.history,
     lastTurn: state.lastTurn,
   };
-  const newIndex = newState.history.length;
-  newState.history.push({ index: newIndex, snapshot: { firstPlayer: newFirst, secondPlayer: newSecond }, lastTurn: state.lastTurn });
-  return newState;
 }
 
 // Revert to previous state, returns new GameState

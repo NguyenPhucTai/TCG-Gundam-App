@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { PlayerSectionProps } from '../../models';
-import Counter from '../counter/Counter';
-import LevelDisplay from '../level/LevelDisplay';
-import { playerSectionStyles } from './PlayerSection.styles';
+import PlayerCounter from './PlayerCounter';
+import PlayerLevel from './PlayerLevel';
+import { playerContainerStyles } from './PlayerContainer.styles';
 
-export default function PlayerSection({ player, onResourceChange, style, isActive }: PlayerSectionProps) {
+export default function PlayerContainer({ player, onResourceChange, style, isActive }: PlayerSectionProps) {
   // Format Ex Resource (display single digit for zero)
   const formatExResource = (value: number) => value.toString();
 
@@ -26,26 +26,26 @@ export default function PlayerSection({ player, onResourceChange, style, isActiv
   };
 
   return (
-    <View style={[playerSectionStyles.playerSection, style]}>
-      <Text style={playerSectionStyles.playerName}>{player.name}</Text>
+    <View style={[playerContainerStyles.playerSection, style]}>
+      <Text style={playerContainerStyles.playerName}>{player.name}</Text>
       
-      <View style={playerSectionStyles.statsContainer}>
-        <Counter 
-          label="Resource" 
+      <View style={playerContainerStyles.statsContainer}>
+        <PlayerCounter
+          label="Resource"
           value={player.resource}
           hasButtons={true}
           onIncrement={handleResourceIncrement}
           onDecrement={handleResourceDecrement}
         />
-        <Counter 
-          label="Ex Resource" 
+        <PlayerCounter
+          label="Ex Resource"
           value={player.exResource}
           hasButtons={true}
           formatValue={formatExResource}
           onIncrement={handleExResourceIncrement}
           onDecrement={handleExResourceDecrement}
         />
-        <LevelDisplay value={player.level} highlight={isActive} />
+        <PlayerLevel value={player.level} highlight={isActive} />
       </View>
     </View>
   );

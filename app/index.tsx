@@ -8,9 +8,9 @@ import {
   resetGame,
   rollDice,
 } from '../util/gameLogic';
-import PlayerSection from '../components/player/PlayerSection';
-import TurnControl from '../components/turn/TurnControl';
-import ControlButtons from '../components/control/ControlButtons';
+import PlayerContainer from '../components/player/PlayerContainer';
+import TurnContainer from '../components/turn/TurnContainer';
+import ControlContainer from '../components/control/ControlContainer';
 import { appStyles } from './index.styles';
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
   ) => {
     setGameState(prev => updateStat(prev, playerKey, statType, newValue));
   };
-  
+
   const handleNextTurn = (playerKey: 'firstPlayer' | 'secondPlayer'): void => {
     setGameState(prev => nextTurn(prev, playerKey));
   };
@@ -47,10 +47,10 @@ export default function App() {
   return (
     <View style={appStyles.container}>
       <View style={appStyles.turnArea}>
-        <TurnControl onNextTurn={handleNextTurn} />
+        <TurnContainer onNextTurn={handleNextTurn} />
       </View>
       <View style={appStyles.gameArea}>
-        <PlayerSection
+      <PlayerContainer
           player={{ id: 'player1', name: 'Player 1', ...gameState.firstPlayer }}
           onResourceChange={(playerId, type, newValue) =>
             handleUpdateStat('firstPlayer', type, newValue)
@@ -58,7 +58,7 @@ export default function App() {
           isActive={gameState.lastTurn === 'firstPlayer'}
           style={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0, borderBottomWidth: 0 }}
         />
-        <PlayerSection
+        <PlayerContainer
           player={{ id: 'player2', name: 'Player 2', ...gameState.secondPlayer }}
           onResourceChange={(playerId, type, newValue) =>
             handleUpdateStat('secondPlayer', type, newValue)
@@ -68,7 +68,7 @@ export default function App() {
         />
       </View>
       <View style={appStyles.controlArea}>
-        <ControlButtons
+        <ControlContainer
           onReset={handleReset}
           onRevert={handleRevert}
           onDice={handleDice}

@@ -1,36 +1,30 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react-native';
-import Counter from '../components/counter/Counter';
-import Button from '../components/common/Button';
+import App from '../app/index';
 
-describe('Counter Component', () => {
-  it('renders correctly with basic props', () => {
-    render(<Counter label="Resource" value={10} /> as React.ReactElement);
-    
-    expect(screen.getByText('Resource')).toBeTruthy();
-    expect(screen.getByText('10')).toBeTruthy();
+describe('Game Screen', () => {
+  it('renders both Player sections', () => {
+    render(<App /> as React.ReactElement);
+    expect(screen.getByText('Player 1')).toBeTruthy();
+    expect(screen.getByText('Player 2')).toBeTruthy();
   });
 
-  it('renders buttons when hasButtons is true', () => {
-    render(<Counter label="Resource" value={10} hasButtons={true} /> as React.ReactElement);
-    
-    expect(screen.getByText('+')).toBeTruthy();
-    expect(screen.getByText('-')).toBeTruthy();
+  it('displays initial stats for both players', () => {
+    render(<App /> as React.ReactElement);
+    // Resource and Ex Resource labels should appear for each player
+    const resources = screen.getAllByText('Resource');
+    expect(resources).toHaveLength(2);
+    const exRes = screen.getAllByText('Ex Resource');
+    expect(exRes).toHaveLength(2);
+    // Initial values (0) should appear at least 4 times (resource, exResource, level x2)
+    const zeros = screen.getAllByText('0');
+    expect(zeros.length).toBeGreaterThanOrEqual(4);
   });
 
-  it('formats value correctly', () => {
-    const formatValue = (value: number) => value.toString().padStart(2, '0');
-    render(<Counter label="Ex Resource" value={5} formatValue={formatValue} /> as React.ReactElement);
-    
-    expect(screen.getByText('05')).toBeTruthy();
-  });
-});
-
-describe('Button Component', () => {
-  it('renders correctly', () => {
-    const mockPress = jest.fn();
-    render(<Button onPress={mockPress}>Test Button</Button> as React.ReactElement);
-    
-    expect(screen.getByText('Test Button')).toBeTruthy();
+  it('shows control buttons on the screen', () => {
+    render(<App /> as React.ReactElement);
+    expect(screen.getByText('Reset')).toBeTruthy();
+    expect(screen.getByText('Revert')).toBeTruthy();
+    expect(screen.getByText('Dice Roll')).toBeTruthy();
   });
 });

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const levelDisplayStyles = StyleSheet.create({
+export const playerLevelStyles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',

@@ -1,15 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
-import { turnControlStyles } from './TurnControl.styles';
+import { turnContainerStyles } from './TurnContainer.styles';
 import TurnButton from './TurnButton';
 
-// Props for TurnControl: callback when player triggers next turn
-export interface TurnControlProps {
+// Props for TurnSection: callback when player triggers next turn
+export interface TurnContainerProps {
   onNextTurn: (playerKey: 'firstPlayer' | 'secondPlayer') => void;
 }
 
-const TurnControl: React.FC<TurnControlProps> = ({ onNextTurn }) => (
-  <View style={turnControlStyles.container}>
+const TurnContainer: React.FC<TurnContainerProps> = ({ onNextTurn }) => (
+  <View style={turnContainerStyles.container}>
     <TurnButton
       label="Player 1 Next Turn"
       onPress={() => onNextTurn('firstPlayer')}
@@ -20,4 +20,4 @@ const TurnControl: React.FC<TurnControlProps> = ({ onNextTurn }) => (
     />
   </View>
 );
-export default TurnControl;
+export default TurnContainer;

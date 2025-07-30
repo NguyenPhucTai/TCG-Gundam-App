@@ -1,11 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const controlButtonsStyles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 25,
-  },
+export const controlButtonStyles = StyleSheet.create({
   controlButton: {
     backgroundColor: 'white',
     borderWidth: 2,

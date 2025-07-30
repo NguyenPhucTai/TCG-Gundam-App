@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const playerSectionStyles = StyleSheet.create({
+export const playerContainerStyles = StyleSheet.create({
   playerSection: {
     minHeight: 180,
     flex: 1,

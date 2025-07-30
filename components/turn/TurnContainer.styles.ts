@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const turnControlStyles = StyleSheet.create({
+export const turnContainerStyles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'space-between',
