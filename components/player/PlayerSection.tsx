@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { PlayerSectionProps } from '../models';
-import Counter from './Counter';
-import LevelDisplay from './LevelDisplay';
+import { PlayerSectionProps } from '../../models';
+import Counter from '../counter/Counter';
+import LevelDisplay from '../level/LevelDisplay';
 import { playerSectionStyles } from './PlayerSection.styles';
 
 export default function PlayerSection({ player, onResourceChange, style, isActive }: PlayerSectionProps) {

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 // workaround for TSX Pressable typing
 const PressableAny: any = Pressable;
-import { CounterProps } from '../models';
-import Button from './Button';
+import { CounterProps } from '../../models';
 import { counterStyles } from './Counter.styles';
 
 export default function Counter({ 

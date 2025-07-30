@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, Text } from 'react-native';
 // workaround for TSX Pressable typing
 const PressableAny: any = Pressable;
-import { ButtonProps } from '../models';
+import { ButtonProps } from '../../models';
 import { buttonStyles } from './Button.styles';
 
 export default function Button({ 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react-native';
-import Counter from '../components/Counter';
-import Button from '../components/Button';
+import Counter from '../components/counter/Counter';
+import Button from '../components/common/Button';
 
 describe('Counter Component', () => {
   it('renders correctly with basic props', () => {

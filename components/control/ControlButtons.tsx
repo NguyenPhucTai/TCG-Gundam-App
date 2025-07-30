@@ -34,7 +34,7 @@ export default function ControlButtons({ onReset, onRevert, onDice }: ControlBut
         onPress={onDice}
         android_ripple={{ color: '#ccc' }}
       >
-        <Text style={controlButtonsStyles.buttonText}>Dice</Text>
+        <Text style={controlButtonsStyles.buttonText}>Dice Roll</Text>
       </PressableAny>
     </View>
   );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Alert } from 'react-native';
-// ...existing imports removed...
 import {
   initGameState,
   nextTurn,
@@ -9,16 +8,14 @@ import {
   resetGame,
   rollDice,
 } from '../util/gameLogic';
-import PlayerSection from '../components/PlayerSection';
-import TurnControl from '../components/TurnControl';
-import ControlButtons from '../components/ControlButtons';
+import PlayerSection from '../components/player/PlayerSection';
+import TurnControl from '../components/turn/TurnControl';
+import ControlButtons from '../components/control/ControlButtons';
 import { appStyles } from './index.styles';
 
 export default function App() {
-  // Manage full game state including history
   const [gameState, setGameState] = useState(initGameState());
 
-  // Update resource/exResource with clamping and history
   const handleUpdateStat = (
     playerKey: 'firstPlayer' | 'secondPlayer',
     statType: 'resource' | 'exResource',
@@ -26,7 +23,7 @@ export default function App() {
   ) => {
     setGameState(prev => updateStat(prev, playerKey, statType, newValue));
   };
-  // Handle Next Turn button press
+  
   const handleNextTurn = (playerKey: 'firstPlayer' | 'secondPlayer'): void => {
     setGameState(prev => nextTurn(prev, playerKey));
   };
@@ -49,12 +46,9 @@ export default function App() {
 
   return (
     <View style={appStyles.container}>
-      {/* Turn Control Area - Bên trái ngoài cùng */}
       <View style={appStyles.turnArea}>
         <TurnControl onNextTurn={handleNextTurn} />
       </View>
-
-      {/* Game Area with both players - Ở giữa màn hình */}
       <View style={appStyles.gameArea}>
         <PlayerSection
           player={{ id: 'player1', name: 'Player 1', ...gameState.firstPlayer }}
@@ -73,8 +67,6 @@ export default function App() {
           style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0, borderTopWidth: 0 }}
         />
       </View>
-
-      {/* Control Buttons - Bên phải màn hình */}
       <View style={appStyles.controlArea}>
         <ControlButtons
           onReset={handleReset}

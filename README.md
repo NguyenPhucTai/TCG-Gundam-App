@@ -48,16 +48,6 @@ npm start
 # or yarn start
 ```
 
-2. Cài đặt dependencies:
-```bash
-npm install
-```
-
-3. Chạy ứng dụng:
-```bash
-npm start
-```
-
 ## 📱 Usage
 
 - Tap “+” / “-” on the counters to adjust values within set ranges
@@ -134,10 +124,6 @@ TCG-Gundam-App/
 
 This project is licensed under the MIT License. See `LICENSE` for details.
 
-## 👨‍💻 Tác giả
+## 👨‍💻 Author
 
 **Nguyen Phuc Tai** - [GitHub](https://github.com/NguyenPhucTai)
-
----
-
-⭐ Hãy star repository này nếu bạn thấy hữu ích!
