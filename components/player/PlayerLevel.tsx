@@ -1,4 +1,5 @@
 import { View, Text } from 'react-native';
+import { LABELS } from '../../constants';
 import { playerLevelStyles } from './PlayerLevel.styles';
 
 export interface PlayerLevelProps {
@@ -10,7 +11,7 @@ export interface PlayerLevelProps {
 export default function PlayerLevel({ value, highlight = false }: PlayerLevelProps) {
   return (
     <View style={playerLevelStyles.container}>
-      <Text style={playerLevelStyles.label}>Level</Text>
+      <Text style={playerLevelStyles.label}>{LABELS.LEVEL}</Text>
       <Text
         style={[
           playerLevelStyles.value,

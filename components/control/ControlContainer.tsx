@@ -1,4 +1,5 @@
 import { View } from 'react-native';
+import { BUTTON_TEXTS } from '../../constants';
 import ControlButton from './ControlButton';
 import { controlContainerStyles } from './ControlContainer.styles';
 
@@ -12,10 +13,10 @@ interface ControlContainerProps {
 export default function ControlContainer({ onReset, onRevert, onDice, onLevelUp }: ControlContainerProps) {
   return (
     <View style={controlContainerStyles.container}>
-      <ControlButton label="Reset" onPress={onReset} />
-      <ControlButton label="Level Up" onPress={onLevelUp} />
-      <ControlButton label="Revert" onPress={onRevert} />
-      <ControlButton label="Dice Roll" onPress={onDice} />
+      <ControlButton label={BUTTON_TEXTS.RESET} onPress={onReset} />
+      <ControlButton label={BUTTON_TEXTS.LEVEL_UP} onPress={onLevelUp} />
+      <ControlButton label={BUTTON_TEXTS.REVERT} onPress={onRevert} />
+      <ControlButton label={BUTTON_TEXTS.DICE_ROLL} onPress={onDice} />
     </View>
   );
 }

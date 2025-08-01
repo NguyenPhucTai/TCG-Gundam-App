@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native';
 import { PlayerSectionProps } from '../../models';
+import { LABELS } from '../../constants';
 import PlayerCounter from './PlayerCounter';
 import PlayerLevel from './PlayerLevel';
 import { playerContainerStyles } from './PlayerContainer.styles';
@@ -30,14 +31,14 @@ export default function PlayerContainer({ player, onResourceChange, style, isAct
       
       <View style={playerContainerStyles.statsContainer}>
         <PlayerCounter
-          label="Resource"
+          label={LABELS.RESOURCE}
           value={player.resource}
           hasButtons={true}
           onIncrement={handleResourceIncrement}
           onDecrement={handleResourceDecrement}
         />
         <PlayerCounter
-          label="Ex Resource"
+          label={LABELS.EX_RESOURCE}
           value={player.exResource}
           hasButtons={true}
           formatValue={formatExResource}

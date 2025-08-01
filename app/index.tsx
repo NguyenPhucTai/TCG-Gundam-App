@@ -8,11 +8,14 @@ import {
   resetGame,
   rollDice,
   levelUp,
-} from '../util/gameLogic';
+} from '../util/game';
+import { POPUP_MESSAGES, BUTTON_TEXTS, LABELS } from '../constants';
+import { GAME_CONFIG } from '../constants/gameConfig';
 import PlayerContainer from '../components/player/PlayerContainer';
 import TurnContainer from '../components/turn/TurnContainer';
 import ControlContainer from '../components/control/ControlContainer';
 import Popup from '../components/common/Popup';
+import DicePopup from '../components/common/DicePopup';
 import { appStyles } from './index.styles';
 
 export default function HomeScreen() {
@@ -22,6 +25,10 @@ export default function HomeScreen() {
     message: '',
     action: null as (() => void) | null,
     showAcceptButton: true,
+  });
+  const [dicePopup, setDicePopup] = useState({
+    visible: false,
+    result: 0,
   });
 
   const showPopup = (message: string, action: () => void) => {
@@ -39,6 +46,20 @@ export default function HomeScreen() {
       message,
       action: null,
       showAcceptButton: false,
+    });
+  };
+
+  const showDicePopup = (result: number) => {
+    setDicePopup({
+      visible: true,
+      result,
+    });
+  };
+
+  const hideDicePopup = () => {
+    setDicePopup({
+      visible: false,
+      result: 0,
     });
   };
 
@@ -77,7 +98,7 @@ export default function HomeScreen() {
 
   const handleReset = () => {
     showPopup(
-      'Are you sure you want to reset the game? All data will be lost.',
+      POPUP_MESSAGES.RESET_CONFIRMATION,
       () => setGameState(resetGame())
     );
   };
@@ -85,7 +106,7 @@ export default function HomeScreen() {
   const handleRevert = () => {
     if (gameState.history.length > 1) {
       showPopup(
-        'Do you want to revert to the previous state?',
+        POPUP_MESSAGES.REVERT_CONFIRMATION,
         () => setGameState(prev => revertState(prev))
       );
     }
@@ -93,17 +114,17 @@ export default function HomeScreen() {
 
   const handleDice = () => {
     showPopup(
-      'Do you want to roll the dice?',
+      POPUP_MESSAGES.DICE_CONFIRMATION,
       () => {
         const result = rollDice();
-        showInfoPopup(`You rolled: ${result}`);
+        showDicePopup(result);
       }
     );
   };
 
   const handleLevelUp = () => {
     showPopup(
-      'Do you want to level up the current player?',
+      POPUP_MESSAGES.LEVEL_UP_CONFIRMATION,
       () => {
         const result = levelUp(gameState);
         if (result.error) {
@@ -122,7 +143,7 @@ export default function HomeScreen() {
       </View>
       <View style={appStyles.gameArea}>
       <PlayerContainer
-          player={{ id: 'player1', name: 'Player 1', ...gameState.firstPlayer }}
+          player={{ id: 'player1', name: LABELS.PLAYER_1, ...gameState.firstPlayer }}
           onResourceChange={(playerId, type, newValue) =>
             handleUpdateStat('firstPlayer', type, newValue)
           }
@@ -130,7 +151,7 @@ export default function HomeScreen() {
           style={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0, borderBottomWidth: 0 }}
         />
         <PlayerContainer
-          player={{ id: 'player2', name: 'Player 2', ...gameState.secondPlayer }}
+          player={{ id: 'player2', name: LABELS.PLAYER_2, ...gameState.secondPlayer }}
           onResourceChange={(playerId, type, newValue) =>
             handleUpdateStat('secondPlayer', type, newValue)
           }
@@ -152,6 +173,11 @@ export default function HomeScreen() {
         onCancel={handlePopupCancel}
         onAccept={handlePopupAccept}
         showAcceptButton={popup.showAcceptButton}
+      />
+      <DicePopup
+        visible={dicePopup.visible}
+        diceResult={dicePopup.result}
+        onClose={hideDicePopup}
       />
     </View>
   );

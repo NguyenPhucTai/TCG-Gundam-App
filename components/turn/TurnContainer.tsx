@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { BUTTON_TEXTS } from '../../constants';
 import { turnContainerStyles } from './TurnContainer.styles';
 import TurnButton from './TurnButton';
 
@@ -11,11 +12,11 @@ export interface TurnContainerProps {
 const TurnContainer: React.FC<TurnContainerProps> = ({ onNextTurn }) => (
   <View style={turnContainerStyles.container}>
     <TurnButton
-      label="Player 1 Next Turn"
+      label={BUTTON_TEXTS.PLAYER_1_NEXT_TURN}
       onPress={() => onNextTurn('firstPlayer')}
     />
     <TurnButton
-      label="Player 2 Next Turn"
+      label={BUTTON_TEXTS.PLAYER_2_NEXT_TURN}
       onPress={() => onNextTurn('secondPlayer')}
     />
   </View>

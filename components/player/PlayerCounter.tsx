@@ -1,5 +1,6 @@
 import { View, Text, Pressable } from 'react-native';
 import { CounterProps } from '../../models';
+import { BUTTON_TEXTS } from '../../constants';
 import { counterStyles } from './PlayerCounter.styles';
 
 // workaround for TSX Pressable typing
@@ -34,14 +35,14 @@ export default function PlayerCounter({
               onPress={onIncrement}
               android_ripple={{ color: '#ccc' }}
             >
-              <Text style={counterStyles.buttonText}>+</Text>
+              <Text style={counterStyles.buttonText}>{BUTTON_TEXTS.PLUS}</Text>
             </PressableAny>
             <PressableAny
               style={isExResource ? counterStyles.controlButtonExResource : counterStyles.controlButton}
               onPress={onDecrement}
               android_ripple={{ color: '#ccc' }}
             >
-              <Text style={counterStyles.buttonText}>-</Text>
+              <Text style={counterStyles.buttonText}>{BUTTON_TEXTS.MINUS}</Text>
             </PressableAny>
           </View>
         )}
