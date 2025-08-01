@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Alert } from 'react-native';
 import {
   initGameState,
@@ -7,13 +7,14 @@ import {
   revertState,
   resetGame,
   rollDice,
+  levelUp,
 } from '../util/gameLogic';
 import PlayerContainer from '../components/player/PlayerContainer';
 import TurnContainer from '../components/turn/TurnContainer';
 import ControlContainer from '../components/control/ControlContainer';
 import { appStyles } from './index.styles';
 
-export default function App() {
+export default function HomeScreen() {
   const [gameState, setGameState] = useState(initGameState());
 
   const handleUpdateStat = (
@@ -33,15 +34,25 @@ export default function App() {
   };
 
   const handleRevert = () => {
-    Alert.alert('Revert', 'Are you sure you want to revert to the previous state?', [
-      { text: 'Cancel' },
-      { text: 'Agree', onPress: () => setGameState(prev => revertState(prev)) },
-    ]);
+    if (gameState.history.length > 1) {
+      Alert.alert(
+        'Confirm Revert',
+        'Hoàn tác sẽ quay về trạng thái trước đó. Bạn có chắc chắn?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Accept', onPress: () => setGameState(prev => revertState(prev)) },
+        ]
+      );
+    }
   };
 
   const handleDice = () => {
     const result = rollDice();
     Alert.alert('Dice Roll', `You rolled: ${result}`);
+  };
+
+  const handleLevelUp = () => {
+    setGameState(prev => levelUp(prev));
   };
 
   return (
@@ -72,6 +83,7 @@ export default function App() {
           onReset={handleReset}
           onRevert={handleRevert}
           onDice={handleDice}
+          onLevelUp={handleLevelUp}
         />
       </View>
     </View>

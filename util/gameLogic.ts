@@ -56,11 +56,6 @@ export function nextTurn(
   if (newMax > 10) {
     newMax = 10;
   }
-  // Enforce alternating difference constraint
-  if (Math.abs(newMax - otherMax) > 1) {
-    Alert.alert('Alert', 'Cannot increase maxResource: difference would exceed 1');
-    return state;
-  }
   // Apply increment safely
   target.maxResource = newMax;
   // Limit displayed resource to 10 regardless of maxResource
@@ -122,6 +117,38 @@ export function revertState(state: GameState): GameState {
 // Reset the game to initial state
 export function resetGame(): GameState {
   return initGameState();
+}
+
+// Level up the current player (increase maxResource by 1)
+export function levelUp(state: GameState): GameState {
+  if (!state.lastTurn) {
+    Alert.alert('Level Up Error', 'No player has taken a turn yet');
+    return state;
+  }
+  
+  const newFirst = deepClone(state.firstPlayer);
+  const newSecond = deepClone(state.secondPlayer);
+  const target = state.lastTurn === 'firstPlayer' ? newFirst : newSecond;
+  
+  // Check if already at max
+  if (target.maxResource >= 10) {
+    Alert.alert('Level Up Error', 'Player is already at maximum level');
+    return state;
+  }
+  
+  // Increase maxResource by 1
+  target.maxResource += 1;
+  target.level = target.maxResource + target.exResource;
+  
+  // Update resource if needed
+  target.resource = Math.min(target.resource, target.maxResource);
+  
+  return {
+    firstPlayer: newFirst,
+    secondPlayer: newSecond,
+    history: state.history,
+    lastTurn: state.lastTurn,
+  };
 }
 
 // Roll dice (1 to 6)

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pressable, Text } from 'react-native';
 // workaround for TSX Pressable typing
 const PressableAny: any = Pressable;

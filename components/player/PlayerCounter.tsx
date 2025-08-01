@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { CounterProps } from '../../models';
 import { counterStyles } from './PlayerCounter.styles';

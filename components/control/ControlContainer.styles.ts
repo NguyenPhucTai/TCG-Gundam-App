@@ -4,6 +4,6 @@ export const controlContainerStyles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 25,
+    gap: 20,
   },
 });
