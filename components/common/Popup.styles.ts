@@ -4,18 +4,32 @@ const { width } = Dimensions.get('window');
 
 export const popupStyles = StyleSheet.create({
   overlay: {
-    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1000,
   },
   container: {
     width: width * 0.8,
     backgroundColor: 'white',
     borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#1e40af',
     padding: 20,
     alignItems: 'center',
-    elevation: 5,
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
   message: {
     fontSize: 18,
@@ -25,7 +39,7 @@ export const popupStyles = StyleSheet.create({
   },
   buttonRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: '100%',
   },
   cancelButton: {
@@ -35,6 +49,7 @@ export const popupStyles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#cccccc',
     alignItems: 'center',
+    maxWidth: 120,
   },
   cancelText: {
     color: '#333333',
@@ -48,6 +63,7 @@ export const popupStyles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#1e40af',
     alignItems: 'center',
+    maxWidth: 120,
   },
   acceptText: {
     color: 'white',

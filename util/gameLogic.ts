@@ -1,7 +1,11 @@
-import { Alert } from 'react-native';
 import { GameState } from '../models/GameState';
 import { GameSnapshot } from '../models/GameSnapshot';
 import { PlayerState } from '../models/PlayerState';
+
+export interface GameActionResult {
+  state: GameState;
+  error?: string;
+}
 
 // Initialize base player state
 const basePlayerState: PlayerState = {
@@ -34,11 +38,13 @@ export function initGameState(): GameState {
 export function nextTurn(
   state: GameState,
   playerKey: 'firstPlayer' | 'secondPlayer'
-): GameState {
+): GameActionResult {
   // Enforce alternating turns: prevent same player twice
   if (state.lastTurn === playerKey) {
-    Alert.alert('Turn Error', 'You must alternate turns between players');
-    return state;
+    return {
+      state,
+      error: 'You must alternate turns between players'
+    };
   }
   const newFirst = deepClone(state.firstPlayer);
   const newSecond = deepClone(state.secondPlayer);
@@ -70,7 +76,7 @@ export function nextTurn(
   const newIndex = newState.history.length;
   const newSnapshot: GameSnapshot = { firstPlayer: newFirst, secondPlayer: newSecond };
   newState.history.push({ index: newIndex, snapshot: newSnapshot, lastTurn: playerKey });
-  return newState;
+  return { state: newState };
 }
 
 // Update resource or exResource for a player, clamp within bounds, recalc level and record history
@@ -120,10 +126,12 @@ export function resetGame(): GameState {
 }
 
 // Level up the current player (increase maxResource by 1)
-export function levelUp(state: GameState): GameState {
+export function levelUp(state: GameState): GameActionResult {
   if (!state.lastTurn) {
-    Alert.alert('Level Up Error', 'No player has taken a turn yet');
-    return state;
+    return {
+      state,
+      error: 'No player has taken a turn yet'
+    };
   }
   
   const newFirst = deepClone(state.firstPlayer);
@@ -132,8 +140,10 @@ export function levelUp(state: GameState): GameState {
   
   // Check if already at max
   if (target.maxResource >= 10) {
-    Alert.alert('Level Up Error', 'Player is already at maximum level');
-    return state;
+    return {
+      state,
+      error: 'Player is already at maximum level'
+    };
   }
   
   // Increase maxResource by 1
@@ -144,10 +154,12 @@ export function levelUp(state: GameState): GameState {
   target.resource = Math.min(target.resource, target.maxResource);
   
   return {
-    firstPlayer: newFirst,
-    secondPlayer: newSecond,
-    history: state.history,
-    lastTurn: state.lastTurn,
+    state: {
+      firstPlayer: newFirst,
+      secondPlayer: newSecond,
+      history: state.history,
+      lastTurn: state.lastTurn,
+    }
   };
 }
 

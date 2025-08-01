@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Alert } from 'react-native';
+import { View } from 'react-native';
 import {
   initGameState,
   nextTurn,
@@ -12,10 +12,51 @@ import {
 import PlayerContainer from '../components/player/PlayerContainer';
 import TurnContainer from '../components/turn/TurnContainer';
 import ControlContainer from '../components/control/ControlContainer';
+import Popup from '../components/common/Popup';
 import { appStyles } from './index.styles';
 
 export default function HomeScreen() {
   const [gameState, setGameState] = useState(initGameState());
+  const [popup, setPopup] = useState({
+    visible: false,
+    message: '',
+    action: null as (() => void) | null,
+    showAcceptButton: true,
+  });
+
+  const showPopup = (message: string, action: () => void) => {
+    setPopup({
+      visible: true,
+      message,
+      action,
+      showAcceptButton: true,
+    });
+  };
+
+  const showInfoPopup = (message: string) => {
+    setPopup({
+      visible: true,
+      message,
+      action: null,
+      showAcceptButton: false,
+    });
+  };
+
+  const handlePopupAccept = () => {
+    const currentAction = popup.action;
+    
+    setPopup({ visible: false, message: '', action: null, showAcceptButton: true });
+    
+    if (currentAction) {
+      setTimeout(() => {
+        currentAction();
+      }, 100);
+    }
+  };
+
+  const handlePopupCancel = () => {
+    setPopup({ visible: false, message: '', action: null, showAcceptButton: true });
+  };
 
   const handleUpdateStat = (
     playerKey: 'firstPlayer' | 'secondPlayer',
@@ -26,33 +67,52 @@ export default function HomeScreen() {
   };
 
   const handleNextTurn = (playerKey: 'firstPlayer' | 'secondPlayer'): void => {
-    setGameState(prev => nextTurn(prev, playerKey));
+    const result = nextTurn(gameState, playerKey);
+    if (result.error) {
+      showInfoPopup(result.error);
+    } else {
+      setGameState(result.state);
+    }
   };
 
   const handleReset = () => {
-    setGameState(resetGame());
+    showPopup(
+      'Are you sure you want to reset the game? All data will be lost.',
+      () => setGameState(resetGame())
+    );
   };
 
   const handleRevert = () => {
     if (gameState.history.length > 1) {
-      Alert.alert(
-        'Confirm Revert',
-        'Hoàn tác sẽ quay về trạng thái trước đó. Bạn có chắc chắn?',
-        [
-          { text: 'Cancel', style: 'cancel' },
-          { text: 'Accept', onPress: () => setGameState(prev => revertState(prev)) },
-        ]
+      showPopup(
+        'Do you want to revert to the previous state?',
+        () => setGameState(prev => revertState(prev))
       );
     }
   };
 
   const handleDice = () => {
-    const result = rollDice();
-    Alert.alert('Dice Roll', `You rolled: ${result}`);
+    showPopup(
+      'Do you want to roll the dice?',
+      () => {
+        const result = rollDice();
+        showInfoPopup(`You rolled: ${result}`);
+      }
+    );
   };
 
   const handleLevelUp = () => {
-    setGameState(prev => levelUp(prev));
+    showPopup(
+      'Do you want to level up the current player?',
+      () => {
+        const result = levelUp(gameState);
+        if (result.error) {
+          showInfoPopup(result.error);
+        } else {
+          setGameState(result.state);
+        }
+      }
+    );
   };
 
   return (
@@ -86,6 +146,13 @@ export default function HomeScreen() {
           onLevelUp={handleLevelUp}
         />
       </View>
+      <Popup
+        visible={popup.visible}
+        message={popup.message}
+        onCancel={handlePopupCancel}
+        onAccept={handlePopupAccept}
+        showAcceptButton={popup.showAcceptButton}
+      />
     </View>
   );
 }
