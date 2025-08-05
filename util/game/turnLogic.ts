@@ -41,7 +41,7 @@ export function nextTurn(
   
   // Apply increment safely
   target.maxResource = newMax;
-  target.resource = Math.min(target.resource, target.maxResource);
+  target.resource = target.maxResource; // Reset resource to maxResource on next turn
   target.level = target.maxResource + target.exResource;
   
   const newState: GameState = {

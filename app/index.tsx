@@ -113,13 +113,8 @@ export default function HomeScreen() {
   };
 
   const handleDice = () => {
-    showPopup(
-      POPUP_MESSAGES.DICE_CONFIRMATION,
-      () => {
-        const result = rollDice();
-        showDicePopup(result);
-      }
-    );
+    const result = rollDice();
+    showDicePopup(result);
   };
 
   const handleLevelUp = () => {
